@@ -1,6 +1,8 @@
 import React from 'react';
-import { Container, Header, Content, Form, Item, Input, Button, Text } from 'native-base';
-import CustomHeader from "../CustomHeader";
+import {Container, Header, Content, Form, Item, Input, Button, Text, H2} from 'native-base';
+import {
+    StyleSheet,
+} from 'react-native';
 import StepIndicator from "react-native-step-indicator";
 import ThirdIndicatorStyles from "../../constants/Styles"
 
@@ -10,6 +12,14 @@ export default class AcceptBetScreen extends React.Component {
         header: null
     };
 
+    constructor(props) {
+        super(props);
+
+        this.bet = this.props.navigation.getParam('bet');
+
+        console.log(this.bet);
+    }
+
     render() {
         return (
             <Container>
@@ -17,11 +27,11 @@ export default class AcceptBetScreen extends React.Component {
                     <StepIndicator
                         stepCount={5}
                         customStyles={ThirdIndicatorStyles}
-                        currentPosition={0}
+                        currentPosition={4}
                         labels={['Summoner', 'Game', 'Tokens', 'Duration', 'Accept Bet']}
                     />
-                </Content>
-                <Content padder contentContainerStyle={{flex:1,justifyContent: 'center'}}>
+                    <H2 style={styles.minutes}>{this.bet.tokens} Tokens</H2>
+                    <H2 style={styles.tokens}>{this.bet.duration} Minutes</H2>
                 </Content>
                 <Content padder contentContainerStyle={{flex:1,justifyContent: 'flex-end'}}>
                     <Button block info onPress={this._nextStep}>
@@ -32,3 +42,13 @@ export default class AcceptBetScreen extends React.Component {
         );
     }
 };
+const styles = StyleSheet.create({
+    minutes: {
+        marginBottom: 20,
+        marginLeft: 10
+    },
+    tokens: {
+        marginBottom: 20,
+        marginLeft: 10
+    }
+});

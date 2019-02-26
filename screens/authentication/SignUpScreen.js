@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 
 import StepIndicator from 'react-native-step-indicator'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import ThirdIndicatorStyles from "../../constants/Styles"
 
 

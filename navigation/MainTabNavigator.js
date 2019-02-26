@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -9,10 +9,17 @@ import SettingsScreen from '../screens/SettingsScreen';
 import CustomHeader from "../screens/CustomHeader";
 import SearchScreen from "../screens/SearchScreen";
 import CreateBetNavigator from "./CreateBetNavigator";
+import SideBar from "../screens/SideBar";
+import ProfileScreen from "../screens/ProfileScreen";
+import FriendsListScreen from "../screens/FriendsListScreen";
+import OpenBetsListScreen from "../screens/OpenBetsListScreen";
 
 const HomeStack = createStackNavigator({
-    Home: HomeScreen,
-    CreateBet: { screen: CreateBetNavigator }
+    Home: { screen: HomeScreen },
+    CreateBet: { screen: CreateBetNavigator },
+    Profile:{ screen: ProfileScreen },
+    Friends:{ screen: FriendsListScreen },
+    Settings:{ screen: SettingsScreen }
 },
 {
     defaultNavigationOptions: {
@@ -92,7 +99,7 @@ SearcherStack.navigationOptions = {
 
 
 const OpenBetStack = createStackNavigator({
-    Home: HomeScreen,
+    OpenBetsList: OpenBetsListScreen,
 });
 
 OpenBetStack.navigationOptions = {
@@ -105,7 +112,7 @@ OpenBetStack.navigationOptions = {
     ),
 };
 
-export default MainTabNavigator = createBottomTabNavigator({
+const MainTabNavigator = createBottomTabNavigator({
   HomeStack,
   WalletStack,
   SearcherStack,
@@ -116,3 +123,26 @@ export default MainTabNavigator = createBottomTabNavigator({
         header: props => <CustomHeader {...props} />
     }
 });
+
+const DrawerNavigator = createDrawerNavigator({
+    Home:{
+        screen: MainTabNavigator
+    }
+}, {
+    initialRouteName: 'Home',
+    contentComponent: props => <SideBar {...props} />,
+    }
+);
+
+export default StackNavigator = createStackNavigator({
+    DrawerNavigator:{
+        screen: DrawerNavigator
+    }
+},
+{
+    defaultNavigationOptions: {
+        header: null
+    }
+});
+
+
