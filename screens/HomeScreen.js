@@ -13,17 +13,8 @@ import {
     Button,
     Text,
     Container,
-    Card,
-    CardItem,
-    Body,
-    Content,
-    Header,
-    Title,
-    Left,
-    Icon,
-    Right
+    Content
 } from "native-base";
-import { DrawerActions } from 'react-navigation-drawer';
 import CustomHeader from "./CustomHeader";
 
 export default class HomeScreen extends React.Component {

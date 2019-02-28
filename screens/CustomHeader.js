@@ -40,7 +40,7 @@ export default class CustomHeader extends React.Component {
                     </Button>
                 </Left>
                 <Body>
-                <Title>HomeScreen</Title>
+                <Title>LOGO</Title>
                 </Body>
                 <Right>
                     <Button
