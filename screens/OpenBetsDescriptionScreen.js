@@ -5,6 +5,7 @@ import {
 } from 'native-base';
 import {
     StyleSheet,
+    Alert
 } from 'react-native';
 import StepIndicator from "react-native-step-indicator";
 import CustomHeader from "./CustomHeader";
@@ -61,6 +62,7 @@ export default class OpenBetsDescriptionScreen extends React.Component {
                             <Col>
                                 <Icon ios='ios-checkmark-circle'
                                       android="md-checkmark-circle"
+                                      onPress={this._alert}
                                       style={styles.iconYes}/>
                             </Col>
                         </Row>
@@ -71,7 +73,22 @@ export default class OpenBetsDescriptionScreen extends React.Component {
     }
     _returnToList = () => {
         this.props.navigation.navigate('OpenBetsList');
-    }
+    };
+
+    _alert = () => {
+        Alert.alert(
+            "Do you want to accept the bet?", null,
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: false }
+        );
+    };
 
 }
 

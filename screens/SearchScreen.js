@@ -11,7 +11,7 @@ import {
     Title,
     Left,
     Icon,
-    Right, Segment, Item, Input
+    Right, Segment, Item, Input, ListItem, Thumbnail, List
 } from "native-base";
 import { DrawerActions } from 'react-navigation-drawer';
 
@@ -42,6 +42,32 @@ export default class SearchScreen extends React.Component {
                     <Input placeholder="Search" />
                 </Item>
             </Header>
+                <List>
+                    <ListItem thumbnail>
+                        <Left>
+                            <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                        </Left>
+                        <Body>
+                        <Text>Kumar Pratik</Text>
+                        <Text note>Doing what you like will always keep you happy . .</Text>
+                        </Body>
+                        <Right>
+                            <Icon ios='ios-close' android="md-close" style={{fontSize: 40, color: 'red'}}/>
+                        </Right>
+                    </ListItem>
+                    <ListItem thumbnail>
+                        <Left>
+                            <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                        </Left>
+                        <Body>
+                        <Text>Kumar Pratik</Text>
+                        <Text note>Doing what you like will always keep you happy . .</Text>
+                        </Body>
+                        <Right>
+                            <Icon ios='ios-close' android="md-close" style={{fontSize: 40, color: 'red'}}/>
+                        </Right>
+                    </ListItem>
+                </List>
                 </Content>;
 
         else
@@ -55,6 +81,32 @@ export default class SearchScreen extends React.Component {
                         <Input placeholder="Search" />
                     </Item>
                 </Header>
+                <List>
+                    <ListItem thumbnail>
+                        <Left>
+                            <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                        </Left>
+                        <Body>
+                        <Text>Kumar Pratik</Text>
+                        <Text note>Doing what you like will always keep you happy . .</Text>
+                        </Body>
+                        <Right>
+                            <Icon ios='ios-close' android="md-close" style={{fontSize: 40, color: 'red'}}/>
+                        </Right>
+                    </ListItem>
+                    <ListItem thumbnail>
+                        <Left>
+                            <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                        </Left>
+                        <Body>
+                        <Text>Kumar Pratik</Text>
+                        <Text note>Doing what you like will always keep you happy . .</Text>
+                        </Body>
+                        <Right>
+                            <Icon ios='ios-close' android="md-close" style={{fontSize: 40, color: 'red'}}/>
+                        </Right>
+                    </ListItem>
+                </List>
             </Content>;
     };
 
