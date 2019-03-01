@@ -65,6 +65,10 @@ export default class FriendsListScreen extends React.Component {
             </Container>
         );
     }
+
+    _openBetDescription = () => {
+        this.props.navigation.navigate('OpenBetDescription');
+    };
 }
 
 const styles = StyleSheet.create({

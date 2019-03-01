@@ -16,19 +16,7 @@ export default class OpenBetsListScreen extends React.Component {
         header: null
     };
 
-    state = {
-        modalVisible: false,
-        filter: {
-            region: 'EUW1',
-            tokens: [0, 100],
-            minutes: [0, 60]
-        },
-        newFilter: {
-            region: 'EUW1',
-            tokens: [],
-            minutes: []
-        }
-    };
+
 
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
@@ -40,10 +28,49 @@ export default class OpenBetsListScreen extends React.Component {
             }
         });
     }
-
+    _removeRegion() {
+        this.setState({
+            filter: {
+                region: '',
+                tokens: this.state.filter.tokens,
+                minutes: this.state.filter.minutes
+            }
+        });
+    }
+    _removeTokens() {
+        this.setState({
+            filter: {
+                region: this.state.filter.region,
+                tokens: [],
+                minutes: this.state.filter.minutes
+            }
+        });
+    }
+    _removeMinutes() {
+        this.setState({
+            filter: {
+                region: this.state.filter.region,
+                tokens: this.state.filter.tokens,
+                minutes: []
+            }
+        });
+    }
     constructor(props) {
         super(props);
 
+        this.state = {
+            modalVisible: false,
+            filter: {
+                region: 'EUW1',
+                tokens: [0, 100],
+                minutes: [0, 60]
+            },
+            newFilter: {
+                region: 'EUW1',
+                tokens: [],
+                minutes: []
+            }
+        };
     }
 
     render() {
@@ -129,7 +156,7 @@ export default class OpenBetsListScreen extends React.Component {
                 <Content scrollEnabled={false}>
                     <Header searchBar rounded
                             style={{borderBottomWidth: 0,
-                                marginTop: -10,
+                                marginTop: -15,
                                 backgroundColor: 'transparent'}}>
                         <Item>
                             <Icon name="ios-search" />
@@ -141,20 +168,9 @@ export default class OpenBetsListScreen extends React.Component {
                             <Text>Filters</Text>
                         </Button>
                     </Header>
-                    <Header style={{borderBottomWidth: 0,
-                        marginTop: -15,
-                        backgroundColor: 'transparent'}}>
-                        <Grid style={{marginLeft: '2.5%'}}>
-                            <Row>
-                                {this._regionBadge()}
-                                {this._tokensBadge()}
-                                {this._minutesBadge()}
-                            </Row>
-                        </Grid>
-
-                    </Header>
+                    {this._tags()}
                     <List style={{marginTop: -15}}>
-                        <ListItem>
+                        <ListItem onPress={this._openBet}>
                             <Body>
                                 <Grid>
                                     <Row>
@@ -218,6 +234,24 @@ export default class OpenBetsListScreen extends React.Component {
         );
     }
 
+    _tags = () => {
+        if(this.state.filter.region || this.state.filter.tokens.length !== 0 || this.state.filter.minutes.length !== 0) {
+           return(
+               <Header style={{borderBottomWidth: 0,
+                   marginTop: -15,
+                   backgroundColor: 'transparent'}}>
+                   <Grid style={{marginLeft: '2.5%'}}>
+                       <Row>
+                           {this._regionBadge()}
+                           {this._tokensBadge()}
+                           {this._minutesBadge()}
+                       </Row>
+                   </Grid>
+               </Header>
+           )
+        }
+    };
+
     _regionBadge = () => {
         if(this.state.filter.region) {
             return (
@@ -228,6 +262,9 @@ export default class OpenBetsListScreen extends React.Component {
                             <Col size={1} style={{marginLeft: 1}}>
                                 <Icon ios='ios-close'
                                       android="md-close"
+                                      onPress={() => {
+                                          this._removeRegion()
+                                      }}
                                       style={{fontSize: 20, color: '#5a5a5a'}}/>
                             </Col>
                             <Col size={11}>
@@ -253,6 +290,9 @@ export default class OpenBetsListScreen extends React.Component {
                                 <Col size={1} style={{marginLeft: 1}}>
                                     <Icon ios='ios-close'
                                           android="md-close"
+                                          onPress={() => {
+                                              this._removeTokens()
+                                          }}
                                           style={{fontSize: 20, color: '#5a5a5a'}}/>
                                 </Col>
                                 <Col size={11}>
@@ -279,6 +319,9 @@ export default class OpenBetsListScreen extends React.Component {
                                 <Col size={1} style={{marginLeft: 1}}>
                                     <Icon ios='ios-close'
                                           android="md-close"
+                                          onPress={() => {
+                                              this._removeMinutes();
+                                          }}
                                           style={{fontSize: 20, color: '#5a5a5a'}}/>
                                 </Col>
                                 <Col size={11}>
@@ -292,8 +335,11 @@ export default class OpenBetsListScreen extends React.Component {
                 </Col>
             )
         }
-    }
+    };
 
+    _openBet = () => {
+        this.props.navigation.navigate('OpenBetsDescription');
+    };
 
 }
 

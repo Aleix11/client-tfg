@@ -13,6 +13,7 @@ import SideBar from "../screens/SideBar";
 import ProfileScreen from "../screens/ProfileScreen";
 import FriendsListScreen from "../screens/FriendsListScreen";
 import OpenBetsListScreen from "../screens/OpenBetsListScreen";
+import OpenBetsDescriptionScreen from "../screens/OpenBetsDescriptionScreen";
 
 const HomeStack = createStackNavigator({
     Home: { screen: HomeScreen },
@@ -100,6 +101,7 @@ SearcherStack.navigationOptions = {
 
 const OpenBetStack = createStackNavigator({
     OpenBetsList: OpenBetsListScreen,
+    OpenBetsDescription: OpenBetsDescriptionScreen
 });
 
 OpenBetStack.navigationOptions = {

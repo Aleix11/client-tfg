@@ -14,13 +14,6 @@ export default class ProfileScreen extends React.Component {
     constructor(props) {
         super(props);
 
-        this.bet = {
-            summoner: '',
-            game: '',
-            team: '',
-            tokens: 0,
-            duration: 0
-        }
     }
 
 
