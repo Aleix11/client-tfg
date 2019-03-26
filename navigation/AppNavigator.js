@@ -6,11 +6,13 @@ import LogInScreen from '../screens/authentication/LogInScreen'
 import SignUpScreen from '../screens/authentication/SignUpScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import MainTabNavigator from "./MainTabNavigator";
+import SingUpEmailScreen from "../screens/authentication/SingUpEmailScreen";
 
 const AuthStack = createStackNavigator(
     {
         StartScreen: StartScreen,
         SignUpScreen: SignUpScreen,
+        SingUpEmailScreen: SingUpEmailScreen,
         LogInScreen: LogInScreen
     }
 );

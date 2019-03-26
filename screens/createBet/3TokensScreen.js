@@ -60,7 +60,7 @@ export default class TokenScreen extends React.Component {
     };
 
     _commission() {
-        return this.state.value * 0.05
+        return this.state.value * 0.02
     };
 };
 const styles = StyleSheet.create({

@@ -8,8 +8,6 @@ import {
     StyleSheet
 } from 'react-native';
 import CustomHeader from "./CustomHeader";
-import RangeSlider from "react-native-range-slider";
-
 
 export default class OpenBetsListScreen extends React.Component {
     static navigationOptions = {

@@ -7,8 +7,10 @@ import {
 import StepIndicator from 'react-native-step-indicator'
 import ThirdIndicatorStyles from "../../constants/Styles"
 
+// import { AccessToken, LoginManager } from 'react-native-fbsdk';
+// import firebase from 'react-native-firebase'
 
-import { Container, Content, Form, Item, Input, Button, Text, Toast } from 'native-base';
+import {Container, Content, Form, Item, Input, Button, Text, Toast, Grid, Row, Col} from 'native-base';
 
 export default class SignUpScreen extends React.Component {
     static navigationOptions = {
@@ -21,113 +23,76 @@ export default class SignUpScreen extends React.Component {
 
     constructor(props){
         super(props);
-
-        this.state = {
-            username: '',
-            email: '',
-            password: '',
-            password2: ''
-        };
-
-        this.getData = {
-            token: ''
-        };
     }
 
     render() {
         return (
             <Container style={styles.container}>
-                <Content>
+                <Content padder>
                     <StepIndicator
                         stepCount={3}
                         customStyles={ThirdIndicatorStyles}
                         currentPosition={0}
                         labels={['Sign Up', 'Ethereum', 'Tokens']}
                         />
-                    <Form style={styles.form}>
-                        <Item rounded style={styles.text}>
-                            <Input onChangeText={(text) => this.setState({username: text})}
-                                   placeholder="Username"/>
-                        </Item>
-                        <Item rounded style={styles.text}>
-                            <Input onChangeText={(text) => this.setState({email: text})}
-                                   keyboardType={'email-address'}
-                                   placeholder="Email"/>
-                        </Item>
-                        <Item rounded style={styles.text}>
-                            <Input onChangeText={(text) => this.setState({password: text})}
-                                   secureTextEntry={true}
-                                   placeholder="Password"/>
-                        </Item>
-                        <Item rounded style={styles.text}>
-                            <Input onChangeText={(text) => this.setState({password2: text})}
-                                   secureTextEntry={true}
-                                   placeholder="Repeat Password"/>
-                        </Item>
-                        <Button block rounded
-                                style={styles.button}
-                                onPress={this._signUp}>
-                            <Text>Sign Up</Text>
-                        </Button>
-                    </Form>
+                    <Grid>
+                        <Row>
+                            <Col>
+                                <Button block rounded
+                                        style={styles.button}
+                                        onPress={this._singUpEmail}>
+                                    <Text>Sing Up Email</Text>
+                                </Button>
+                            </Col>
+                            <Col>
+                                {/*<GoogleSigninButton*/}
+                                    {/*style={{ width: 192, height: 48 }}*/}
+                                    {/*size={GoogleSigninButton.Size.Wide}*/}
+                                    {/*color={GoogleSigninButton.Color.Dark}*/}
+                                    {/*onPress={this._signIn}*/}
+                                    {/*disabled={this.state.isSigninInProgress} />*/}
+                            </Col>
+                        </Row>
+                    </Grid>
+
                 </Content>
             </Container>
         );
-    }
-
-    _validate = (text) => {
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-        if(reg.test(text) === false)
-        {
-            console.log("Email is Not Correct");
-            this.setState({email:text});
-            return false;
-        }
-        else {
-            this.setState({email:text});
-            console.log("Email is Correct");
-        }
     };
 
-    _signUp = async () => {
-        if (this.state.password === this.state.password2) {
-            fetch('http://192.168.0.160:3000/users/register', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: this.state.username,
-                    email: this.state.email,
-                    password: this.state.password
-                }),
-            })
-            .then(async req => {
-                console.log(req, req.status);
-                if (req.status === 200) {
-                    await AsyncStorage.clear();
-                    this.getData = JSON.parse(req._bodyText);
-                    const token = this.getData.token;
-                    await AsyncStorage.setItem('token', JSON.stringify(token));
-                    this.props.navigation.navigate('Main');
-                } else {
-                    Toast.show({
-                        text: "" + req.status,
-                        buttonText: "Okay",
-                        duration: 5000
-                    });
-                }
-            })
-            .catch(error => console.log(error));
-        } else {
-            Toast.show({
-                text: 'Passwords are not equal',
-                buttonText: "Okay",
-                duration: 5000
-            });
-        }
-    }
+    _singUpEmail = () => {
+        this.props.navigation.navigate('SingUpEmailScreen');
+    };
+
+    // _signIn = async () => {
+    //     GoogleSignin.configure({
+    //         scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    //         webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    //         offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    //         hostedDomain: '', // specifies a hosted domain restriction
+    //         loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+    //         forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
+    //         accountName: '', // [Android] specifies an account name on the device that should be used
+    //         iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+    //     });
+    //
+    //     try {
+    //         await GoogleSignin.hasPlayServices();
+    //         const userInfo = await GoogleSignin.signIn();
+    //         this.setState({ userInfo });
+    //     } catch (error) {
+    //         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    //             // user cancelled the login flow
+    //         } else if (error.code === statusCodes.IN_PROGRESS) {
+    //             // operation (f.e. sign in) is in progress already
+    //         } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+    //             // play services not available or outdated
+    //         } else {
+    //             // some other error happened
+    //         }
+    //     }
+    // }
+
 }
 
 const styles = StyleSheet.create({
@@ -139,10 +104,6 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: 'white',
         marginBottom: '2%'
-    },
-    form: {
-        padding: '4%',
-        marginTop: '1%'
     },
     button: {
         marginTop: '2%'
