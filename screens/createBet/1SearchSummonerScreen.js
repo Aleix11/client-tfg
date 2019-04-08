@@ -60,7 +60,7 @@ export default class SearchSummonerScreen extends React.Component {
     }
 
     _searchSummoner = () => {
-        fetch('http://192.168.1.35:3000/summoners/searchSummoner', {
+        fetch('http://192.168.1.67:3000/summoners/searchSummoner', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

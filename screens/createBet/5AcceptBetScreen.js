@@ -86,7 +86,7 @@ export default class AcceptBetScreen extends React.Component {
     }
 
     _acceptBet = () => {
-        fetch('http://192.168.1.35:3000/bets/create', {
+        fetch('http://192.168.1.67:3000/bets/create', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

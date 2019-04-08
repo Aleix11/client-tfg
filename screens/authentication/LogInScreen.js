@@ -72,6 +72,7 @@ export default class LogInScreen extends React.Component {
                 this.getData = JSON.parse(req._bodyText);
                 const token = this.getData.token;
                 await AsyncStorage.setItem('token', JSON.stringify(token));
+                await AsyncStorage.setItem('user', JSON.stringify(this.getData));
                 this.props.navigation.navigate('Main');
             } else {
                 Toast.show({
